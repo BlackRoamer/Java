@@ -1,7 +1,10 @@
-package aufgabed;
-
 public class Season {
-String name = "";
-byte number = 0;
-Serie serie;
+    private String name;
+    private int number;
+    private Series series;
+    
+    public Season(Series series, int number) {
+    this.series = series;
+    this.number = number;
+    }
 }

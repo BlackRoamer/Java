@@ -1,9 +1,11 @@
-package aufgabed;
-
 public class Episode {
-String name = "";
-byte number = 0;
-Season season;
-ReleaseDate releaseDate;
-Actor actor;
+    private Season season;
+    private int number;
+    private Date firstBroadcast;
+    private Person mainActor;
+    
+    public Episode(Season season, int number) {
+    this.season = season;
+    this.number = number;
+    }
 }

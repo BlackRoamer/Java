@@ -1,9 +1,18 @@
-package aufgabed;
-
 public enum Genre {
-Adventure, 
-Action,
-Thriller,
-Comedy
-
+    /**
+     * Adventure movies
+     */
+    ADVENTURE, 
+    /**
+     * Action movies
+     */
+    ACTION,
+    /**
+     * Thrillers
+     */
+    THRILLER,
+    /**
+     * Comedy
+     */
+    COMEDY;
 }
