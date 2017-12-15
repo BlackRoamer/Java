@@ -53,18 +53,19 @@ public class Module extends Course {
     public void setLecturesInTheModule(Lecture lecturesInTheModule) {
 	this.lecturesInTheModule.add(lecturesInTheModule);
     }
+
     private void calculateAverage() {
-	 double sum = 0;
-	 double avr = 0;
-	 int credits = 0;
-	for(int i = 0; i < this.lecturesInTheModule.size(); i++) {
+	double sum = 0;
+	double avr = 0;
+	int credits = 0;
+	for (int i = 0; i < this.lecturesInTheModule.size(); i++) {
 	    sum += this.lecturesInTheModule.get(i).getLectureAvrNote();
 	    avr = sum / this.lecturesInTheModule.size();
 	    credits += this.lecturesInTheModule.get(i).getCredits();
 	}
 	this.averageNote = avr;
 	setCredits(credits);
-   }
+    }
 
     @Override
     public String toString() {

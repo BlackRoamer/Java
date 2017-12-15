@@ -21,6 +21,7 @@ public class Lecture extends Course {
 	setModuleId(moduleId);
 	this.lectureID = count;
 	count++;
+	calculateAverage();
 	lecturesList.add(this);
     }
 
@@ -92,7 +93,7 @@ public class Lecture extends Course {
 
     @Override
     public String toString() {
-	calculateAverage();
+	// calculateAverage();
 	String resultAverageNote = String.format("%.2f", this.lectureAvrNote);
 	return this.lectureID + " " + this.getName() + " " + this.credits + " " + resultAverageNote;
     }

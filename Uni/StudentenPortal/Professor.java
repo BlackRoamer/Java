@@ -1,7 +1,9 @@
 package portal;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Professor extends Person {
 
@@ -9,6 +11,7 @@ public class Professor extends Person {
     private List<Lecture> lectures = new ArrayList<>();
     private double averageNote;
     private static List<Professor> allProffesors = new ArrayList<>();
+    private Map<String, Double> lecturesAndNotes = new HashMap<>();
 
     public Professor(String firstName, String lastName, String chairName) {
 	super(firstName, lastName);
@@ -56,6 +59,29 @@ public class Professor extends Person {
 
 	}
 	this.averageNote = avr;
+    }
+
+    public Map<String, Double> getLecturesAndNotes() {
+	return lecturesAndNotes;
+    }
+
+    public void setLecturesAndNotes(String lectureName, double lectureNote) {
+	this.lecturesAndNotes.put(lectureName, lectureNote);
+    }
+
+    public void printSummary() {
+	for (String key : this.lecturesAndNotes.keySet()) {
+	    int lectureId = -1;
+	    for (int k = 0; k < this.lectures.size(); k++) {
+		if (key.equals(this.lectures.get(k).getName())) {
+		    lectureId = this.lectures.get(k).getLectureID();
+		}
+	    }
+	    Double lectureNote = this.lecturesAndNotes.get(key);
+	    String lectureNoteFormatted = String.format("%.2f", lectureNote);
+	    System.out.println(lectureId + " " + key + " " + lectureNoteFormatted);
+	}
+
     }
 
     @Override

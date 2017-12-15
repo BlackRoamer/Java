@@ -1,10 +1,8 @@
 package portal;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 public class Student extends Person {
@@ -13,7 +11,6 @@ public class Student extends Person {
     private Set<String> uniqueIds = new HashSet<>();
     private static List<Student> allStudents = new ArrayList<>();
     private List<Double> notes = new ArrayList<>();
-    private Map<String, Integer> lectureNotes = new HashMap<>();
     private double averageNote = 0;
 
     public Student(String firstName, String lastName, String ID) {
@@ -62,10 +59,6 @@ public class Student extends Person {
 	} else {
 	    this.notes.add(note);
 	}
-    }
-
-    public Map<String, Integer> getLectureNotes() {
-	return lectureNotes;
     }
 
     public static boolean checkForDuplicatedIdStudents(String Id) {
