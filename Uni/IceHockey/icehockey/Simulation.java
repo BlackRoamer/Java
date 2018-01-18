@@ -1,5 +1,6 @@
 package icehockey;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Simulation {
@@ -78,11 +79,17 @@ public class Simulation {
 
     private void listTeams(String[] input) {
 	if (HelperClass.checkForParamsListTeamsCommand(input)) {
-	    for (int i = 0; i < Teamslist.getAllTeams().size(); i++) {
-		int Id = Teamslist.getAllTeams().get(i).getID();
-		String name = Teamslist.getAllTeams().get(i).getName();
-		System.out.println(Id + " " + name);
-	    }
+	    List<Team> newList = HelperClass.sortTeamsById();
+	    for (int i = 0; i < newList.size(); i++) {
+			int Id = newList.get(i).getID();
+			String name = newList.get(i).getName();
+			System.out.println(Id + " " + name);
+		    }
+//	    for (int i = 0; i < Teamslist.getAllTeams().size(); i++) {
+//		int Id = Teamslist.getAllTeams().get(i).getID();
+//		String name = Teamslist.getAllTeams().get(i).getName();
+//		System.out.println(Id + " " + name);
+//	    }
 	}
     }
 

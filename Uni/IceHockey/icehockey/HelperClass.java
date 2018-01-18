@@ -6,7 +6,20 @@ import java.util.Comparator;
 import java.util.List;
 
 public class HelperClass {
+    
+    protected static List<Team> sortTeamsById() {
+   	List<Team> copyOfTeams = new ArrayList<>(Teamslist.getAllTeams());
+   	Collections.sort(copyOfTeams, new Comparator<Team>() {
+   	    @Override
+   	    public int compare(Team o1, Team o2) {
 
+   		return o1.getID() - o2.getID();
+   	    }
+   	});
+   	return copyOfTeams;
+
+       }
+    
     protected static List<Team> sortTeamsByPoints() {
 	List<Team> copyOfTeams = new ArrayList<>(Teamslist.getAllTeams());
 	Collections.sort(copyOfTeams, new Comparator<Team>() {
