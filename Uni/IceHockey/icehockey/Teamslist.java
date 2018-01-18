@@ -12,8 +12,8 @@ public class Teamslist {
     }
 
     public static void setAllTeams(Team team) {
-	    allTeams.add(team);
-	
+	allTeams.add(team);
+
     }
 
 }

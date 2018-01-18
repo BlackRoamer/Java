@@ -4,7 +4,7 @@ public class Team {
 
     private int ID;
     private String name = "";
-    private int goals = 0;
+    private int goalDif = 0;
     private int points = 0;
 
     public Team(int ID, String name) {
@@ -16,7 +16,7 @@ public class Team {
 	return ID;
     }
 
-    public void setID(int iD) {	
+    public void setID(int iD) {
 	this.ID = iD;
     }
 
@@ -29,11 +29,11 @@ public class Team {
     }
 
     public int getGoals() {
-	return goals;
+	return goalDif;
     }
 
     public void setGoals(int goals) {
-	this.goals = goals;
+	this.goalDif += goals;
     }
 
     public int getPoints() {
@@ -41,7 +41,7 @@ public class Team {
     }
 
     public void setPoints(int points) {
-	this.points = points;
+	this.points += points;
     }
 
 }

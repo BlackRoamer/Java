@@ -4,13 +4,6 @@ import java.util.Scanner;
 
 public class Simulation {
 
-    /*
-     * SAMPLE INPUT
-     *  > add-team 11;abcd OK > add-team 13;ijkl OK > add-team
-     * 12;efgh OK > add-team 14;mnop OK > list-team 11 abcd 12 efgh 13 ijkl 14
-     * mnop
-     */
-
     public void runSimulation() {
 	Scanner scan = new Scanner(System.in);
 	String input = scan.nextLine();
@@ -27,36 +20,20 @@ public class Simulation {
 
 	switch (command) {
 	case "add-team":
-	    if (HelperClass.checkForParamsAddTeamCommand(input)) {
-		String[] paramsSplitted = input[1].split(";");
-		
-		int Id = parseId(paramsSplitted[0]);
-		String teamName = paramsSplitted[1];
-		
-		if(HelperClass.checkConstructorParams(Id, teamName)) {
-		    Team newTeam = new Team(Id, teamName);   
-		    if (HelperClass.checkForExistingTeams(newTeam)) {
-		    Teamslist.setAllTeams(newTeam);
-		    System.out.println("Ok");
-		    }
-		}
-		
-	    }
+	    addTeam(input);
 	    break;
-	case "list-team":
-	    if (HelperClass.checkForParamsListTeamsCommand(input)) {
-		for (int i = 0; i < Teamslist.getAllTeams().size(); i++) {
-		    int Id = Teamslist.getAllTeams().get(i).getID();
-		    String name = Teamslist.getAllTeams().get(i).getName();
-		    System.out.println(Id + " " + name);
-		}
-	    }
-	    break;
-	case "add-ice-hockey-match":
-	    if (HelperClass.checkForParamsAddMatch(input)) {
-		String[] paramsSplitted = input[1].split(";");
 
-	    }
+	case "list-team":
+	    listTeams(input);
+	    break;
+
+	case "add-ice-hockey-match":
+	    addMatch(input);
+	    break;
+
+	case "print-del-standings":
+	    printStandings();
+	    break;
 
 	default:
 	    System.out.println("Error: Invalid command");
@@ -64,16 +41,67 @@ public class Simulation {
 
     }
 
-    private int parseId(String params) {
-	int Id = -1;
-	try {
-	    Id = Integer.parseInt(params);
-	} catch (Exception e) {
-	    System.out.println("ID can't be parsed");
-
+    private void printStandings() {
+	for (int i = 0; i < HelperClass.sortTeamsByPoints().size(); i++) {
+	    int index = i + 1;
+	    System.out.println(index + " " + HelperClass.sortTeamsByPoints().get(i).getName() + " "
+		    + HelperClass.sortTeamsByPoints().get(i).getPoints() + " "
+		    + HelperClass.sortTeamsByPoints().get(i).getGoals());
 	}
-	return Id;
+
     }
 
- 
+    private void addMatch(String[] input) {
+	if (HelperClass.checkForParamsAddMatch(input)) {
+	    String[] paramsSplitted = input[1].split(";");
+	    int firstTeamId = HelperClass.parseId(paramsSplitted[0]);
+	    int secondTeamId = HelperClass.parseId(paramsSplitted[2]);
+	    if (HelperClass.checkForRegisteredTeam(firstTeamId) && HelperClass.checkForRegisteredTeam(secondTeamId)) {
+		int firstTeamScore = HelperClass.parseScore(paramsSplitted[1]);
+		int secondTeamScore = HelperClass.parseScore(paramsSplitted[3]);
+		int gameTime = HelperClass.parseTime(paramsSplitted[4]);
+		if (HelperClass.checkForGameTime(gameTime)) {
+		    Team firstTeam = HelperClass.findTeamById(firstTeamId);
+		    Team secondTeam = HelperClass.findTeamById(secondTeamId);
+		    if (HelperClass.checkForPositiveScore(firstTeamScore)
+			    && HelperClass.checkForPositiveScore(secondTeamScore)) {
+			if (HelperClass.checkForValidGame(firstTeamScore, secondTeamScore, gameTime)) {
+			    HelperClass.calculatePoints(firstTeam, firstTeamScore, secondTeam, secondTeamScore,
+				    gameTime);
+			    System.out.println("Ok");
+			}
+		    }
+		}
+	    }
+	}
+    }
+
+    private void listTeams(String[] input) {
+	if (HelperClass.checkForParamsListTeamsCommand(input)) {
+	    for (int i = 0; i < Teamslist.getAllTeams().size(); i++) {
+		int Id = Teamslist.getAllTeams().get(i).getID();
+		String name = Teamslist.getAllTeams().get(i).getName();
+		System.out.println(Id + " " + name);
+	    }
+	}
+    }
+
+    private void addTeam(String[] input) {
+	if (HelperClass.checkForParamsAddTeamCommand(input)) {
+	    String[] paramsSplitted = input[1].split(";");
+
+	    int Id = HelperClass.parseId(paramsSplitted[0]);
+	    String teamName = paramsSplitted[1];
+
+	    if (HelperClass.checkConstructorParams(Id, teamName)) {
+		Team newTeam = new Team(Id, teamName);
+		if (HelperClass.checkForExistingTeams(newTeam)) {
+		    Teamslist.setAllTeams(newTeam);
+		    System.out.println("Ok");
+		}
+	    }
+
+	}
+    }
+
 }
