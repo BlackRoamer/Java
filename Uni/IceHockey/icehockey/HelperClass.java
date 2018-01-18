@@ -6,20 +6,20 @@ import java.util.Comparator;
 import java.util.List;
 
 public class HelperClass {
-    
+
     protected static List<Team> sortTeamsById() {
-   	List<Team> copyOfTeams = new ArrayList<>(Teamslist.getAllTeams());
-   	Collections.sort(copyOfTeams, new Comparator<Team>() {
-   	    @Override
-   	    public int compare(Team o1, Team o2) {
+	List<Team> copyOfTeams = new ArrayList<>(Teamslist.getAllTeams());
+	Collections.sort(copyOfTeams, new Comparator<Team>() {
+	    @Override
+	    public int compare(Team o1, Team o2) {
 
-   		return o1.getID() - o2.getID();
-   	    }
-   	});
-   	return copyOfTeams;
+		return o1.getID() - o2.getID();
+	    }
+	});
+	return copyOfTeams;
 
-       }
-    
+    }
+
     protected static List<Team> sortTeamsByPoints() {
 	List<Team> copyOfTeams = new ArrayList<>(Teamslist.getAllTeams());
 	Collections.sort(copyOfTeams, new Comparator<Team>() {
@@ -94,8 +94,7 @@ public class HelperClass {
     }
 
     protected static boolean checkForGameTime(int gameTime) {
-
-	if (gameTime < 60 && gameTime > 120) {
+	if (gameTime < 60 || gameTime > 120) {
 	    System.out.println("Error: Time must be between 60 and 120");
 	    return false;
 	}

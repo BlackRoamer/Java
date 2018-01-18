@@ -81,15 +81,10 @@ public class Simulation {
 	if (HelperClass.checkForParamsListTeamsCommand(input)) {
 	    List<Team> newList = HelperClass.sortTeamsById();
 	    for (int i = 0; i < newList.size(); i++) {
-			int Id = newList.get(i).getID();
-			String name = newList.get(i).getName();
-			System.out.println(Id + " " + name);
-		    }
-//	    for (int i = 0; i < Teamslist.getAllTeams().size(); i++) {
-//		int Id = Teamslist.getAllTeams().get(i).getID();
-//		String name = Teamslist.getAllTeams().get(i).getName();
-//		System.out.println(Id + " " + name);
-//	    }
+		int Id = newList.get(i).getID();
+		String name = newList.get(i).getName();
+		System.out.println(Id + " " + name);
+	    }
 	}
     }
 
