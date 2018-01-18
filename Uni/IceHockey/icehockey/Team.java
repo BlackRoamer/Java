@@ -2,20 +2,12 @@ package icehockey;
 
 public class Team {
 
-    private int ID = 0;
+    private int ID;
     private String name = "";
     private int goals = 0;
     private int points = 0;
 
     public Team(int ID, String name) {
-	if (ID <= 0) {
-	    try {
-		throw new Exception();
-	    } catch (Exception e) {
-		System.out.println("ERROR INVALID ID ");
-	    }
-	    return;
-	}
 	this.ID = ID;
 	this.name = name;
     }
@@ -24,15 +16,7 @@ public class Team {
 	return ID;
     }
 
-    public void setID(int iD) {
-	if (iD <= 0) {
-	    try {
-		throw new Exception();
-	    } catch (Exception e) {
-		System.out.println("ERROR INVALID ID ");
-	    }
-	    return;
-	}
+    public void setID(int iD) {	
 	this.ID = iD;
     }
 

@@ -27,25 +27,24 @@ public class Simulation {
 
 	switch (command) {
 	case "add-team":
-	    if (checkForParamsAddTeamCommand(input)) {
+	    if (HelperClass.checkForParamsAddTeamCommand(input)) {
 		String[] paramsSplitted = input[1].split(";");
+		
 		int Id = parseId(paramsSplitted[0]);
-		// try {
-		// Id = Integer.parseInt(paramsSplitted[0]);
-		// } catch(Exception e) {
-		// System.out.println("Error: Invalid ID");
-		// return;
-		// }
 		String teamName = paramsSplitted[1];
-		Team newTeam = new Team(Id, teamName);
-
-		System.out.println(newTeam.getID() + newTeam.getName() + "TEXT");
-		Teamslist.setAllTeams(newTeam);
-
+		
+		if(HelperClass.checkConstructorParams(Id, teamName)) {
+		    Team newTeam = new Team(Id, teamName);   
+		    if (HelperClass.checkForExistingTeams(newTeam)) {
+		    Teamslist.setAllTeams(newTeam);
+		    System.out.println("Ok");
+		    }
+		}
+		
 	    }
 	    break;
 	case "list-team":
-	    if (checkForParamsListTeamsCommand(input)) {
+	    if (HelperClass.checkForParamsListTeamsCommand(input)) {
 		for (int i = 0; i < Teamslist.getAllTeams().size(); i++) {
 		    int Id = Teamslist.getAllTeams().get(i).getID();
 		    String name = Teamslist.getAllTeams().get(i).getName();
@@ -54,7 +53,7 @@ public class Simulation {
 	    }
 	    break;
 	case "add-ice-hockey-match":
-	    if (checkForParamsAddMatch(input)) {
+	    if (HelperClass.checkForParamsAddMatch(input)) {
 		String[] paramsSplitted = input[1].split(";");
 
 	    }
@@ -70,102 +69,11 @@ public class Simulation {
 	try {
 	    Id = Integer.parseInt(params);
 	} catch (Exception e) {
-	    System.out.println("Error: Invalid ID");
+	    System.out.println("ID can't be parsed");
 
 	}
 	return Id;
     }
 
-    private boolean checkForParamsAddTeamCommand(String[] input) {
-
-	if (input.length != 2) {
-	    System.out.println("Error: Invalid number of params");
-	    return false;
-	} else {
-	    String[] splittedInput = input[1].split(";");
-	    if (splittedInput.length != 2) {
-		System.out.println("Error: Invalid number of params in command");
-		return false;
-	    }
-	}
-
-	return true;
-    }
-
-    private boolean checkForParamsListTeamsCommand(String[] input) {
-	if (input.length != 1) {
-	    System.out.println("Error: Invalid number of params");
-	    return false;
-	}
-	return true;
-    }
-
-    private boolean checkForParamsAddMatch(String[] input) {
-	if (input.length != 2) {
-	    System.out.println("Error: Invalid number of params");
-	    return false;
-	} else {
-	    String[] splitInput = input[1].split(";");
-	    if (splitInput.length != 5) {
-		System.out.println("Error: Invalid number of params in the command ");
-		return false;
-	    }
-	}
-	return true;
-    }
-
-    private boolean checkForParamsPrint(String[] input) {
-	if (input.length != 1) {
-	    System.out.println("Error: Invalid number of params");
-	    return false;
-	}
-	return true;
-    }
-
-    private boolean checkForParamsQuit(String[] input) {
-	if (input.length != 1) {
-	    System.out.println("Error: Invalid number of params");
-	    return false;
-	}
-	return true;
-    }
-
-    private boolean checkForParams(String[] input) {
-	String command = input[0];
-	switch (command) {
-	case "add-team":
-	    if (input.length != 2) {
-		System.out.println("Error: Invalid number of params");
-		return false;
-	    }
-	case "list-team":
-	    if (input.length != 1) {
-		System.out.println("Error: Invalid number of params");
-		return false;
-	    }
-	case "add-ice-hockey-match":
-	    if (input.length != 2) {
-		System.out.println("Error: Invalid number of params");
-		return false;
-	    } else {
-		String[] splitInput = input[1].split(";");
-		if (splitInput.length != 5) {
-		    System.out.println("Error: Invalid number of params in the command ");
-		    return false;
-		}
-	    }
-	case "print-del-standings":
-	    if (input.length != 1) {
-		System.out.println("Error: Invalid number of params");
-		return false;
-	    }
-	case "quit":
-	    if (input.length != 1) {
-		System.out.println("Error: Invalid number of params");
-		return false;
-	    }
-
-	}
-	return true;
-    }
+ 
 }
